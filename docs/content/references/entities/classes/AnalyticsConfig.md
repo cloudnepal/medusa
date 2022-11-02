@@ -2,25 +2,35 @@
 displayed_sidebar: entitiesSidebar
 ---
 
-# Class: ProductTag
+# Class: AnalyticsConfig
 
 ## Hierarchy
 
 - `SoftDeletableEntity`
 
-  ↳ **`ProductTag`**
+  ↳ **`AnalyticsConfig`**
 
 ## Constructors
 
 ### constructor
 
-• **new ProductTag**()
+• **new AnalyticsConfig**()
 
 #### Inherited from
 
 SoftDeletableEntity.constructor
 
 ## Properties
+
+### anonymize
+
+• **anonymize**: `boolean`
+
+#### Defined in
+
+[models/analytics-config.ts:17](https://github.com/cloudnepal/medusa/blob/0b0d50b4/packages/medusa/src/models/analytics-config.ts#L17)
+
+___
 
 ### created\_at
 
@@ -64,13 +74,13 @@ SoftDeletableEntity.id
 
 ___
 
-### metadata
+### opt\_out
 
-• **metadata**: `Record`<`string`, `unknown`\>
+• **opt\_out**: `boolean`
 
 #### Defined in
 
-[models/product-tag.ts:13](https://github.com/cloudnepal/medusa/blob/0b0d50b4/packages/medusa/src/models/product-tag.ts#L13)
+[models/analytics-config.ts:14](https://github.com/cloudnepal/medusa/blob/0b0d50b4/packages/medusa/src/models/analytics-config.ts#L14)
 
 ___
 
@@ -88,13 +98,13 @@ SoftDeletableEntity.updated\_at
 
 ___
 
-### value
+### user\_id
 
-• **value**: `string`
+• **user\_id**: `string`
 
 #### Defined in
 
-[models/product-tag.ts:10](https://github.com/cloudnepal/medusa/blob/0b0d50b4/packages/medusa/src/models/product-tag.ts#L10)
+[models/analytics-config.ts:11](https://github.com/cloudnepal/medusa/blob/0b0d50b4/packages/medusa/src/models/analytics-config.ts#L11)
 
 ## Methods
 
@@ -108,4 +118,4 @@ ___
 
 #### Defined in
 
-[models/product-tag.ts:15](https://github.com/cloudnepal/medusa/blob/0b0d50b4/packages/medusa/src/models/product-tag.ts#L15)
+[models/analytics-config.ts:19](https://github.com/cloudnepal/medusa/blob/0b0d50b4/packages/medusa/src/models/analytics-config.ts#L19)
