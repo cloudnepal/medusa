@@ -1,16 +1,16 @@
-# Class: CurrencyService
+# Class: PaymentService
 
 ## Hierarchy
 
 - `TransactionBaseService`
 
-  ↳ **`CurrencyService`**
+  ↳ **`PaymentService`**
 
 ## Constructors
 
 ### constructor
 
-• **new CurrencyService**(`__namedParameters`)
+• **new PaymentService**(`__namedParameters`)
 
 #### Parameters
 
@@ -24,7 +24,7 @@ TransactionBaseService.constructor
 
 #### Defined in
 
-[packages/medusa/src/services/currency.ts:32](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/currency.ts#L32)
+[packages/medusa/src/services/payment.ts:40](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/payment.ts#L40)
 
 ## Properties
 
@@ -56,39 +56,19 @@ TransactionBaseService.\_\_container\_\_
 
 ___
 
-### currencyRepository\_
-
-• `Protected` `Readonly` **currencyRepository\_**: typeof `CurrencyRepository`
-
-#### Defined in
-
-[packages/medusa/src/services/currency.ts:28](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/currency.ts#L28)
-
-___
-
 ### eventBusService\_
 
 • `Protected` `Readonly` **eventBusService\_**: [`EventBusService`](EventBusService.md)
 
 #### Defined in
 
-[packages/medusa/src/services/currency.ts:29](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/currency.ts#L29)
-
-___
-
-### featureFlagRouter\_
-
-• `Protected` `Readonly` **featureFlagRouter\_**: `FlagRouter`
-
-#### Defined in
-
-[packages/medusa/src/services/currency.ts:30](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/currency.ts#L30)
+[packages/medusa/src/services/payment.ts:28](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/payment.ts#L28)
 
 ___
 
 ### manager\_
 
-• `Protected` **manager\_**: `EntityManager`
+• `Protected` `Readonly` **manager\_**: `EntityManager`
 
 #### Overrides
 
@@ -96,7 +76,27 @@ TransactionBaseService.manager\_
 
 #### Defined in
 
-[packages/medusa/src/services/currency.ts:25](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/currency.ts#L25)
+[packages/medusa/src/services/payment.ts:26](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/payment.ts#L26)
+
+___
+
+### paymentProviderService\_
+
+• `Protected` `Readonly` **paymentProviderService\_**: [`PaymentProviderService`](PaymentProviderService.md)
+
+#### Defined in
+
+[packages/medusa/src/services/payment.ts:29](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/payment.ts#L29)
+
+___
+
+### paymentRepository\_
+
+• `Protected` `Readonly` **paymentRepository\_**: typeof `PaymentRepository`
+
+#### Defined in
+
+[packages/medusa/src/services/payment.ts:30](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/payment.ts#L30)
 
 ___
 
@@ -110,7 +110,7 @@ TransactionBaseService.transactionManager\_
 
 #### Defined in
 
-[packages/medusa/src/services/currency.ts:26](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/currency.ts#L26)
+[packages/medusa/src/services/payment.ts:27](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/payment.ts#L27)
 
 ___
 
@@ -122,11 +122,16 @@ ___
 
 | Name | Type |
 | :------ | :------ |
+| `CREATED` | `string` |
+| `PAYMENT_CAPTURED` | `string` |
+| `PAYMENT_CAPTURE_FAILED` | `string` |
+| `REFUND_CREATED` | `string` |
+| `REFUND_FAILED` | `string` |
 | `UPDATED` | `string` |
 
 #### Defined in
 
-[packages/medusa/src/services/currency.ts:21](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/currency.ts#L21)
+[packages/medusa/src/services/payment.ts:31](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/payment.ts#L31)
 
 ## Methods
 
@@ -169,55 +174,87 @@ TransactionBaseService.atomicPhase\_
 
 ___
 
-### listAndCount
+### capture
 
-▸ **listAndCount**(`selector`, `config?`): `Promise`<[`Currency`[], `number`]\>
-
-Lists currencies based on the provided parameters and includes the count of
-currencies that match the query.
+▸ **capture**(`paymentOrId`): `Promise`<`Payment`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `selector` | `Selector`<`Currency`\> | an object that defines rules to filter currencies   by |
-| `config` | `FindConfig`<`Currency`\> | object that defines the scope for what should be   returned |
+| Name | Type |
+| :------ | :------ |
+| `paymentOrId` | `string` \| `Payment` |
 
 #### Returns
 
-`Promise`<[`Currency`[], `number`]\>
-
-an array containing the currencies as
-  the first element and the total count of products that matches the query
-  as the second element.
+`Promise`<`Payment`\>
 
 #### Defined in
 
-[packages/medusa/src/services/currency.ts:81](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/currency.ts#L81)
+[packages/medusa/src/services/payment.ts:132](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/payment.ts#L132)
 
 ___
 
-### retrieveByCode
+### create
 
-▸ **retrieveByCode**(`code`): `Promise`<`Currency`\>
-
-Return the currency
+▸ **create**(`paymentInput`): `Promise`<`Payment`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `code` | `string` | The code of the currency that must be retrieve |
+| Name | Type |
+| :------ | :------ |
+| `paymentInput` | `PaymentDataInput` |
 
 #### Returns
 
-`Promise`<`Currency`\>
-
-The currency
+`Promise`<`Payment`\>
 
 #### Defined in
 
-[packages/medusa/src/services/currency.ts:50](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/currency.ts#L50)
+[packages/medusa/src/services/payment.ts:78](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/payment.ts#L78)
+
+___
+
+### refund
+
+▸ **refund**(`paymentOrId`, `amount`, `reason`, `note?`): `Promise`<`Refund`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `paymentOrId` | `string` \| `Payment` |
+| `amount` | `number` |
+| `reason` | `string` |
+| `note?` | `string` |
+
+#### Returns
+
+`Promise`<`Refund`\>
+
+#### Defined in
+
+[packages/medusa/src/services/payment.ts:173](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/payment.ts#L173)
+
+___
+
+### retrieve
+
+▸ **retrieve**(`paymentId`, `config?`): `Promise`<`Payment`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `paymentId` | `string` |
+| `config` | `FindConfig`<`Payment`\> |
+
+#### Returns
+
+`Promise`<`Payment`\>
+
+#### Defined in
+
+[packages/medusa/src/services/payment.ts:55](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/payment.ts#L55)
 
 ___
 
@@ -247,32 +284,30 @@ ___
 
 ### update
 
-▸ **update**(`code`, `data`): `Promise`<`undefined` \| `Currency`\>
-
-Update a currency
+▸ **update**(`paymentId`, `data`): `Promise`<`Payment`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `code` | `string` | The code of the currency to update |
-| `data` | `UpdateCurrencyInput` | The data that must be updated on the currency |
+| Name | Type |
+| :------ | :------ |
+| `paymentId` | `string` |
+| `data` | `Object` |
+| `data.order_id?` | `string` |
+| `data.swap_id?` | `string` |
 
 #### Returns
 
-`Promise`<`undefined` \| `Currency`\>
-
-The updated currency
+`Promise`<`Payment`\>
 
 #### Defined in
 
-[packages/medusa/src/services/currency.ts:103](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/currency.ts#L103)
+[packages/medusa/src/services/payment.ts:103](https://github.com/cloudnepal/medusa/blob/546577a8/packages/medusa/src/services/payment.ts#L103)
 
 ___
 
 ### withTransaction
 
-▸ **withTransaction**(`transactionManager?`): [`CurrencyService`](CurrencyService.md)
+▸ **withTransaction**(`transactionManager?`): [`PaymentService`](PaymentService.md)
 
 #### Parameters
 
@@ -282,7 +317,7 @@ ___
 
 #### Returns
 
-[`CurrencyService`](CurrencyService.md)
+[`PaymentService`](PaymentService.md)
 
 #### Inherited from
 
