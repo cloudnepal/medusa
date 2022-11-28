@@ -12,4 +12,4 @@ displayed_sidebar: entitiesSidebar
 
 #### Defined in
 
-[models/payment-collection.ts:28](https://github.com/medusajs/medusa/blob/da7ea8c5d/packages/medusa/src/models/payment-collection.ts#L28)
+[models/payment-collection.ts:28](https://github.com/cloudnepal/medusa/blob/4f3a7c90/packages/medusa/src/models/payment-collection.ts#L28)
